@@ -5,3 +5,4 @@
 .idea/*
 *.xml
 static/bower_components/*
+/static/.idea/*
