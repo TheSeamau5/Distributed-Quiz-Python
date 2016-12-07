@@ -5,14 +5,55 @@
 
 <dom-module id="d-question">
     <template>
-        <span>What is the capital of France?</span>
-        <paper-radio-group selected="0">
-            <paper-radio-button name="0">Paris</paper-radio-button>
-            <paper-radio-button name="1">Madrid</paper-radio-button>
-            <paper-radio-button name="2">London</paper-radio-button>
-            <paper-radio-button name="3">Prague</paper-radio-button>
-        </paper-radio-group>
+        <style>
+            :host {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
 
+            .layout-container {
+                display: flex;
+                height: 99%;
+                flex-direction: column;
+            }
+
+            .question {
+                margin: 10px;
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 24pt;
+            }
+
+            .choices {
+                flex: 3;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+            }
+
+            .submit {
+                background-color: #2ecc71;
+            }
+        </style>
+        <div class="layout-container">
+            <span class="question">
+                What is the capital of France?
+            </span>
+
+            <paper-radio-group selected="0" class="choices">
+                <paper-radio-button name="0">Paris</paper-radio-button>
+                <paper-radio-button name="1">Madrid</paper-radio-button>
+                <paper-radio-button name="2">London</paper-radio-button>
+                <paper-radio-button name="3">Prague</paper-radio-button>
+            </paper-radio-group>
+
+            <paper-button class="submit" raised>
+                Submit
+            </paper-button>
+        </div>
     </template>
     <script>
         Polymer({
