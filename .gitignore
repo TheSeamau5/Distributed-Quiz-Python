@@ -4,3 +4,4 @@
 .DS_Store
 .idea/*
 *.xml
+static/bower_components/*
