@@ -28,7 +28,7 @@
             }
 
             .choices {
-                flex: 3;
+                flex: 4;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-around;
@@ -43,22 +43,57 @@
                 What is the capital of France?
             </span>
 
-            <paper-radio-group selected="0" class="choices">
-                <paper-radio-button name="0">Paris</paper-radio-button>
-                <paper-radio-button name="1">Madrid</paper-radio-button>
-                <paper-radio-button name="2">London</paper-radio-button>
-                <paper-radio-button name="3">Prague</paper-radio-button>
-            </paper-radio-group>
+            <template is="dom-if" if="[[_shouldRenderChoices]]">
+                <paper-radio-group selected="0" class="choices">
+                    <paper-radio-button name="0">Paris</paper-radio-button>
+                    <paper-radio-button name="1">Madrid</paper-radio-button>
+                    <paper-radio-button name="2">London</paper-radio-button>
+                    <paper-radio-button name="3">Prague</paper-radio-button>
+                </paper-radio-group>
 
-            <paper-button class="submit" raised>
-                Submit
-            </paper-button>
+                <paper-button class="submit" raised>
+                    Submit
+                </paper-button>
+            </template>
+
+            <template is="dom-if" if="[[_shouldRenderBuzzButton]]">
+                <paper-button
+                        class="submit"
+                        raised
+                        on-tap="buzz"
+                >
+                    Buzz
+                </paper-button>
+            </template>
+
+
         </div>
     </template>
     <script>
         Polymer({
             /* this is the element's prototype */
-            is: 'd-question'
+            is: 'd-question',
+            properties: {
+                buzzState: {
+                    type: String,
+                    value: 'Not Answered'
+                },
+                _shouldRenderChoices: {
+                    computed: '_computeShouldRenderChoices(buzzState)'
+                },
+                _shouldRenderBuzzButton: {
+                    computed: '_computeShouldRenderBuzzButton(buzzState)'
+                }
+            },
+            _computeShouldRenderChoices(buzzState) {
+                return buzzState === 'Waiting For Me';
+            },
+            _computeShouldRenderBuzzButton(buzzState) {
+                return buzzState === 'Not Answered';
+            },
+            buzz() {
+                this.buzzState = 'Waiting For Me';
+            }
         });
     </script>
 </dom-module>
